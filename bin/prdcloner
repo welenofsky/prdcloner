@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import argparse
+import os
+import sys
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("url", help="Blogvault Download Link")
+parser.add_argument("git", help="SSH Git Link")
+
+if len(sys.argv)==1:
+	parser.print_help(sys.stderr)
+	sys.exit(1)
+
+args = parser.parse_args()
+
+cmd = 'git clone %s . && wget -O file.zip %s && unzip -o file.zip && grep -e \'DB_PASSWORD\' -e \'DB_NAME\' -e \'DB_USER\' wp-config.php | sort | awk \'{ print $2 }\' | grep -oh "[\\\'\"].*[\\\'\"]" | tr \'\n\' \' \' | tr -d \'"\' | tr -d "\'" | awk \'{ system("mysql -u " $3 " --password=" $2 " " $1 " < bvfulldump.sql") }' % (args.git, args.url)
+
+result = subprocess.run(cmd, stdout=subprocess.PIPE)
+print(result.stdout)
