@@ -13,10 +13,9 @@ The flow to use this tool is that you have a site backed up to blogvault and you
 - a git repo for this site
 - a blogvault download URL
 
-When you have those `cd` to the public_html folder for the site. Then in that folder run the command. See kick the tires below for more info  
+When you have those `cd` to the public_html folder for the site. Then in that folder run the command (Make sure to replace the blogvault link and the github link):  
 `prdclone https://blogvault/download/link.zip git@github.com:three29/wordpress-site.com`  
-
-Make sure to replace the blogvault link and the github link.
+See kick the tires below for more info. 
 
 ## Kick the tires
 What does it do under the hood? It runs this command  
